@@ -228,13 +228,13 @@ cd iot_smart_pir
 
 sudo vi lib/jrpc/server.c
 #define DEVICE_ID "" // gateway ID로 수정
-
+cJSON_AddItemToObject(device, "deviceModelId", cJSON_CreateString("jsonrpcFullV1.0")); // discover 함수쪽 수정
 // 
 sensor = cJSON_CreateObject();
 cJSON_AddStringToObject(sensor, "id", PIR0);
 cJSON_AddStringToObject(sensor, "type", "motion");
 cJSON_AddStringToObject(sensor, "name", "pir0");
-cJSON_AddStringToArray(sensors, sensor);
+cJSON_AddItemToArray(sensors, sensor);
 ```
 
 
