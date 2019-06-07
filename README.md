@@ -212,6 +212,41 @@ sudo ./main : thing+ cloud와 연결되면 센서등록과정이 출력됨
 클라우드의 엑츄에이터에서 제어가능
 ```
 
+-discover 함수
+```
+// AtThing + Potal Sensor Set
+cJSON *discover(jrpc_context_t *ctx, cJSON *params, cJSON *id) {
+	
+  // 1. 변수선언, 초기화 (all, devices, sensors, device, sensor)
+  cJSON* devices = NULL, *device = NULL, *sensor = NULL, *all=NULL, *sensors = NULL;
+   
+  // 2. 객체생성 
+  all = cJSON_CreateObject();
+  devices = cJSON_CreateArray();
+  device = cJSON_CreateObject();  
+  sensors = cJSON_CreateArray();
+  sensor = cJSON_CreateObject();
+ 
+  // 3. AddItem, AddString 처리하기 ( AddItemToObject, AddStringToObject )
+  cJSON_AddItemToObject(device, "deviceAddress", cJSON_CreateString(DEVICE_ID));
+  cJSON_AddItemToObject(device, "deviceModelId", cJSON_CreateString("jsonrpcFullV1.0"));
+	
+  // 4. AddArray 처리하기 (sensors와 sensor들을 다 넣고, sensors를 device에, device를 devices에 넣는다)
+  cJSON_AddItemToArray(sensors, sensor);
+  cJSON_AddItemToObject(device, "sensors", sensors);
+  cJSON_AddItemToArray(devices, device);
+	
+  // 5. All 처리하기 (devices와 sensors을 넣는다)
+  cJSON_AddItemToObject(all, "result", devices);
+  cJSON_AddItemToObject(all, "jsonrpc",cJSON_CreateString(JRPC_VERSION));
+  
+  // 6. All return하기
+  	return all;
+ 
+  
+}
+```
+
 -LED server.c 파일 수정
 ```
 cp -rf agent_base/ iot_smart_led
