@@ -212,7 +212,7 @@ sudo ./main : thing+ cloud와 연결되면 센서등록과정이 출력됨
 클라우드의 엑츄에이터에서 제어가능
 ```
 
--LED
+-LED server.c 파일 수정
 ```
 cp -rf agent_base/ iot_smart_led
 cd iot_smart_led
@@ -220,8 +220,32 @@ cd iot_smart_led
 sudo vi lib/jrpc/server.c
 #define DEVICE_ID "" // gateway ID로 수정
 cJSON_AddItemToObject(device, "deviceModelId", cJSON_CreateString("jsonrpcFullV1.0")); // discover 함수쪽 수정
+sensors = cJSON_CreateArray();
+
+sensor = cJSON_CreateObject();
+cJSON_AddStringToObject(sensor, "id", LED_RED);
+cJSON_AddStringToObject(sensor, "type", "led");
+cJSON_AddStringToObject(sensor, "name", "led_red");
+cJSON_AddItemToArray(sensors, sensor);
+
+sensor = cJSON_CreateObject();
+cJSON_AddStringToObject(sensor, "id", LED_GREEN);
+cJSON_AddStringToObject(sensor, "type", "led");
+cJSON_AddStringToObject(sensor, "name", "led_green");
+cJSON_AddItemToArray(sensors, sensor);
+
+sensor = cJSON_CreateObject();
+cJSON_AddStringToObject(sensor, "id", LED_BLUE);
+cJSON_AddStringToObject(sensor, "type", "led");
+cJSON_AddStringToObject(sensor, "name", "led_blue");
+cJSON_AddItemToArray(sensors, sensor);
+
+cJSON_AddItemToObject(device, "sensors", sensors);
+cJSON_AddItemToObject(all, "result", devices);
+
+
 ```
--pir(인체감지)
+-pir(인체감지) server.c 파일 수정
 ```
 cp -rf agent_base/ iot_smart_pir
 cd iot_smart_pir
