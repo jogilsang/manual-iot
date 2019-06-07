@@ -261,4 +261,16 @@ cJSON_AddStringToObject(sensor, "name", "pir0");
 cJSON_AddItemToArray(sensors, sensor);
 ```
 
+-소리감지센서(SOUND) server.c 파일수정
+```
+cJSON *discover(jrpc_context_t *ctx, cJSON *params, cJSON *id) {
+  sensor = cJSON_CreateObject();
+  cJSON_AddStringToObject(sensor, "id", SOUND0);
+  cJSON_AddStringToObject(sensor, "type", "onoff");
+  cJSON_AddStringToObject(sensor, "name", "SOUND0");
+  cJSON_AddTrueToObject(sensor, "notification");
+  cJSON_AddItemToArray(sensors, sensor);
+}
+```
+
 
