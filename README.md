@@ -232,7 +232,12 @@ cJSON *discover(jrpc_context_t *ctx, cJSON *params, cJSON *id) {
   cJSON_AddItemToObject(device, "deviceModelId", cJSON_CreateString("jsonrpcFullV1.0"));
 	
   // 4. AddArray 처리하기 (sensors와 sensor들을 다 넣고, sensors를 device에, device를 devices에 넣는다)
-  cJSON_AddItemToArray(sensors, sensor);
+  // TODO : sensor에 key-value로 값을넣고, sensors에 추가하는 코드를 추가하거나, 수정해주면된다. 
+  // start
+  // EX :
+  // 1. 센서 값 추가       (cJSON_AddStringToObject(sensor, "id", LED_GREEN);)
+  // 2. 센서들에 센서 추가 (cJSON_AddItemToArray(sensors, sensor);)
+  // end
   cJSON_AddItemToObject(device, "sensors", sensors);
   cJSON_AddItemToArray(devices, device);
 	
