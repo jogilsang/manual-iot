@@ -273,4 +273,15 @@ cJSON *discover(jrpc_context_t *ctx, cJSON *params, cJSON *id) {
 }
 ```
 
+- 울트라소닉 감지 server.c 파일수정
+```
+cJSON *discover(jrpc_context_t *ctx, cJSON *params, cJSON *id) {
+  sensor = cJSON_CreateObject();
+  cJSON_AddStringToObject(sensor, "id", ULTRASONIC0);
+  cJSON_AddStringToObject(sensor, "type", "number");
+  cJSON_AddStringToObject(sensor, "name", "ultrasonic");
+  cJSON_AddItemToArray(sensors, sensor);
+}
+```
+
 
