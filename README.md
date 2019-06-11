@@ -165,7 +165,7 @@ sudo APIKEY='복사한 API키' ./thingplus.sh start
 
 12. 센서 연결후 로그확인
 cd /opt/thingplus/gateway/log
-tail -f log
+tail -f thingplus.log
 ```
 
 ### 라즈베리파이 압축풀기
