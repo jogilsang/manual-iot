@@ -162,6 +162,10 @@ sudo APIKEY='복사한 API키' ./thingplus.sh start
 센서분석 : 게이트웨이에 등록되어있는 센서 목록 중 원하는 센서 지정하여
           차트형태로 확인이 가능한 페이지
 4가지 기능 사용가능
+
+12. 센서 연결후 로그확인
+cd /opt/thingplus/gateway/log
+tail -f log
 ```
 
 ### 라즈베리파이 압축풀기
