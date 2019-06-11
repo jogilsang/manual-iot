@@ -216,7 +216,12 @@ sudo ./main : thing+ cloud와 연결되면 센서등록과정이 출력됨
 클라우드의 엑츄에이터에서 제어가능
 ```
 
--discover 함수
+### 라즈베리파이 server.c 수정
+0. cp -rf agent_base/ iot_smart_led  
+   cd iot_smart_led  
+1. sudo vi lib/jrpc/server.c    
+2. #define DEVICE_ID "" // gateway ID로 수정    
+3. discover 함수 수정
 ```
 // AtThing + Potal Sensor Set
 cJSON *discover(jrpc_context_t *ctx, cJSON *params, cJSON *id) {
@@ -236,12 +241,15 @@ cJSON *discover(jrpc_context_t *ctx, cJSON *params, cJSON *id) {
   cJSON_AddItemToObject(device, "deviceModelId", cJSON_CreateString("jsonrpcFullV1.0"));
 	
   // 4. AddArray 처리하기 (sensors와 sensor들을 다 넣고, sensors를 device에, device를 devices에 넣는다)
-  // TODO : sensor에 key-value로 값을넣고, sensors에 추가하는 코드를 추가하거나, 수정해주면된다. 
-  // start
+  // (sensor에 key-value로 값을넣고, sensors에 추가하는 코드를 추가하거나, 수정해주면된다.)
+ 
+  // TODO : Please Input  Your code, and Don't touch other code
   // EX :
   // 1. 센서 값 추가       (cJSON_AddStringToObject(sensor, "id", LED_GREEN);)
   // 2. 센서들에 센서 추가 (cJSON_AddItemToArray(sensors, sensor);)
-  // end
+  
+ 
+  
   cJSON_AddItemToObject(device, "sensors", sensors);
   cJSON_AddItemToArray(devices, device);
 	
@@ -258,14 +266,7 @@ cJSON *discover(jrpc_context_t *ctx, cJSON *params, cJSON *id) {
 
 -LED server.c 파일 수정
 ```
-cp -rf agent_base/ iot_smart_led
-cd iot_smart_led
-
-sudo vi lib/jrpc/server.c
-#define DEVICE_ID "" // gateway ID로 수정
-cJSON_AddItemToObject(device, "deviceModelId", cJSON_CreateString("jsonrpcFullV1.0")); // discover 함수쪽 수정
 sensors = cJSON_CreateArray();
-
 sensor = cJSON_CreateObject();
 cJSON_AddStringToObject(sensor, "id", LED_RED);
 cJSON_AddStringToObject(sensor, "type", "led");
@@ -291,13 +292,7 @@ cJSON_AddItemToObject(all, "result", devices);
 ```
 -pir(인체감지) server.c 파일 수정
 ```
-cp -rf agent_base/ iot_smart_pir
-cd iot_smart_pir
 
-sudo vi lib/jrpc/server.c
-#define DEVICE_ID "" // gateway ID로 수정
-cJSON_AddItemToObject(device, "deviceModelId", cJSON_CreateString("jsonrpcFullV1.0")); // discover 함수쪽 수정
-// 
 sensor = cJSON_CreateObject();
 cJSON_AddStringToObject(sensor, "id", PIR0);
 cJSON_AddStringToObject(sensor, "type", "motion");
