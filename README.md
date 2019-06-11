@@ -24,6 +24,9 @@ https://www.sdcard.org/downloads/formatter/
 SD카드에 OS설치 :  
 https://www.balena.io/etcher/  
 
+SD카드 백업 :
+https://sourceforge.net/projects/win32diskimager/files/latest/download
+
 ### 라즈베리파이 키보드,와이파이 등 세팅
 와이파이 국적 : uk united kingdom  
 키보드 :  
